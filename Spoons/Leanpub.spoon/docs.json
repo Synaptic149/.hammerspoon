@@ -1,0 +1,502 @@
+[
+  {
+    "Command": [],
+    "Constant": [],
+    "Constructor": [],
+    "Deprecated": [],
+    "Field": [],
+    "Function": [],
+    "Method": [
+      {
+        "def": "Leanpub:displayAllBookStatus()",
+        "desc": "Check and display (if needed) the status of all the books in `watch_books`",
+        "doc": "Check and display (if needed) the status of all the books in `watch_books`\n\nParameters:\n * None",
+        "examples": [],
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "282",
+        "name": "displayAllBookStatus",
+        "notes": [],
+        "parameters": [
+          " * None"
+        ],
+        "returns": [],
+        "signature": "Leanpub:displayAllBookStatus()",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "Leanpub:displayBookStatus(book)",
+        "desc": "Display a notification with the current build status of a book.",
+        "doc": "Display a notification with the current build status of a book.\n\nParameters:\n * book - table containing the information of the book to check. The table must contain the following fields:\n   * slug - URL \"slug\" of the book to check. The slug is the part of the book URL after https://leanpub.com/.\n   * icon - optional icon to show in the notifications for the book, as an `hs.image` object. If this field is not specified but `fetch_leanpub_covers` is true (the default value), this method attempts to fetch the book cover from Leanpub. If the cover can be retrieved, it gets stored in the icon field so it doesn't get fetched every time. You can disable cover fetching for individual books by setting this field explicitly to `false`\n\nReturns:\n * A Lua table containing the status (may be empty), nil if an error occurred\n\nNotes:\n* Only produce a notification if the current status is different than the last known one (from the last time `displayBookStatus` was run for the same book).",
+        "examples": [],
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "144",
+        "name": "displayBookStatus",
+        "notes": [
+          "* Only produce a notification if the current status is different than the last known one (from the last time `displayBookStatus` was run for the same book)."
+        ],
+        "parameters": [
+          " * book - table containing the information of the book to check. The table must contain the following fields:\n   * slug - URL \"slug\" of the book to check. The slug is the part of the book URL after https://leanpub.com/.\n   * icon - optional icon to show in the notifications for the book, as an `hs.image` object. If this field is not specified but `fetch_leanpub_covers` is true (the default value), this method attempts to fetch the book cover from Leanpub. If the cover can be retrieved, it gets stored in the icon field so it doesn't get fetched every time. You can disable cover fetching for individual books by setting this field explicitly to `false`"
+        ],
+        "returns": [
+          " * A Lua table containing the status (may be empty), nil if an error occurred"
+        ],
+        "signature": "Leanpub:displayBookStatus(book)",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "Leanpub:fetchBookCover(book)",
+        "desc": "Fetch the cover of a book.",
+        "doc": "Fetch the cover of a book.\n\nParameters:\n * book - table containing the book information. The icon gets\n   stored in its `icon` field when it can be fetched.\n\nReturns:\n * No return value\n\nNotes:\n * Side effects:\n  * Stores the icon in the book data structure",
+        "examples": [],
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "240",
+        "name": "fetchBookCover",
+        "notes": [
+          " * Side effects:",
+          "  * Stores the icon in the book data structure"
+        ],
+        "parameters": [
+          " * book - table containing the book information. The icon gets stored in its `icon` field when it can be fetched."
+        ],
+        "returns": [
+          " * No return value"
+        ],
+        "signature": "Leanpub:fetchBookCover(book)",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "Leanpub:getBookStatus(slug, callback)",
+        "desc": "Asynchronously get the status of a book given its slug.",
+        "doc": "Asynchronously get the status of a book given its slug.\n\nParameters:\n * slug - URL \"slug\" of the book to check. The slug of a book is the part of the URL for your book after https://leanpub.com/.\n * callback - function to which the book status will be passed when the data is received. This function will be passed a single argument, a table containing the fields returned by the Leanpub API. If the book is not being built at the moment, an empty table is passed. If an error occurs, the value passed will be `nil`. Samples of the return values can be found at https://leanpub.com/help/api#getting-the-job-status\n\nReturns:\n * No return value",
+        "examples": [],
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "107",
+        "name": "getBookStatus",
+        "notes": [],
+        "parameters": [
+          " * slug - URL \"slug\" of the book to check. The slug of a book is the part of the URL for your book after https://leanpub.com/.",
+          " * callback - function to which the book status will be passed when the data is received. This function will be passed a single argument, a table containing the fields returned by the Leanpub API. If the book is not being built at the moment, an empty table is passed. If an error occurs, the value passed will be `nil`. Samples of the return values can be found at https://leanpub.com/help/api#getting-the-job-status"
+        ],
+        "returns": [
+          " * No return value"
+        ],
+        "signature": "Leanpub:getBookStatus(slug, callback)",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "Leanpub:start()",
+        "desc": "Start periodic check for book status, checking every check_interval seconds.",
+        "doc": "Start periodic check for book status, checking every check_interval seconds.\n\nParameters:\n * None",
+        "examples": [],
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "296",
+        "name": "start",
+        "notes": [],
+        "parameters": [
+          " * None"
+        ],
+        "returns": [],
+        "signature": "Leanpub:start()",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "Leanpub:stop()",
+        "desc": "Stops periodic check for book status, if enabled.",
+        "doc": "Stops periodic check for book status, if enabled.\n\nParameters:\n * None",
+        "examples": [],
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "309",
+        "name": "stop",
+        "notes": [],
+        "parameters": [
+          " * None"
+        ],
+        "returns": [],
+        "signature": "Leanpub:stop()",
+        "stripped_doc": "",
+        "type": "Method"
+      }
+    ],
+    "Variable": [
+      {
+        "def": "Leanpub.api_key",
+        "desc": "String containing the key to use for Leanpub API requests.",
+        "doc": "String containing the key to use for Leanpub API requests.\n\nNotes:\n * Get it from your Leanpub account under the \"Author / Your API Key\" menu section. No default.",
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "43",
+        "name": "api_key",
+        "notes": [
+          " * Get it from your Leanpub account under the \"Author / Your API Key\" menu section. No default."
+        ],
+        "signature": "Leanpub.api_key",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "Leanpub.books_sync_to_dropbox",
+        "desc": "Boolean that specifies whether all your books are being synced to Dropbox.",
+        "doc": "Boolean that specifies whether all your books are being synced to Dropbox.\n\nNotes:\n * If true, the \"Book generation complete\" notification will include a \"Show\" button to open the book's directory in Dropbox.\n * Setting this is equivalent to setting the `syncs_to_dropbox` attribute for each book in `watch_books`. Default value: `false`.",
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "34",
+        "name": "books_sync_to_dropbox",
+        "notes": [
+          " * If true, the \"Book generation complete\" notification will include a \"Show\" button to open the book's directory in Dropbox.",
+          " * Setting this is equivalent to setting the `syncs_to_dropbox` attribute for each book in `watch_books`. Default value: `false`."
+        ],
+        "signature": "Leanpub.books_sync_to_dropbox",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "Leanpub.check_interval",
+        "desc": "Integer containing the interval (in seconds) at which the book status is checked. Default 5.",
+        "doc": "Integer containing the interval (in seconds) at which the book status is checked. Default 5.",
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "51",
+        "name": "check_interval",
+        "signature": "Leanpub.check_interval",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "Leanpub.dropbox_path",
+        "desc": "String containing the base Dropbox path to which the books are synced, if the corresponding parameters are set.",
+        "doc": "String containing the base Dropbox path to which the books are synced, if the corresponding parameters are set.\n\nNotes:\n * If unset, the path is determined automatically by reading the ~/.dropbox/info.json file and choosing the path corresponding to the profile specified in `Leanpub.dropbox_profile`.\n * If for some reason your synced files are somewhere else, you can store in this variable the final path to use. Most users should be fine with the defaults.",
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "72",
+        "name": "dropbox_path",
+        "notes": [
+          " * If unset, the path is determined automatically by reading the ~/.dropbox/info.json file and choosing the path corresponding to the profile specified in `Leanpub.dropbox_profile`.",
+          " * If for some reason your synced files are somewhere else, you can store in this variable the final path to use. Most users should be fine with the defaults."
+        ],
+        "signature": "Leanpub.dropbox_path",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "Leanpub.dropbox_type",
+        "desc": "String containing the name of the Dropbox account type to use for determining the base path of the Dropbox directory.",
+        "doc": "String containing the name of the Dropbox account type to use for determining the base path of the Dropbox directory.\n\nNotes:\n * Valid values are \"personal\" and \"business\". See https://help.dropbox.com/installs-integrations/desktop/locate-dropbox-folder for the details.\n * Default value: \"personal\".",
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "81",
+        "name": "dropbox_type",
+        "notes": [
+          " * Valid values are \"personal\" and \"business\". See https://help.dropbox.com/installs-integrations/desktop/locate-dropbox-folder for the details.",
+          " * Default value: \"personal\"."
+        ],
+        "signature": "Leanpub.dropbox_type",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "Leanpub.fetch_leanpub_covers",
+        "desc": "Boolean indicating whether we should try to fetch book covers from Leanpub.",
+        "doc": "Boolean indicating whether we should try to fetch book covers from Leanpub.\n\nNotes:\n * Default value: `true`.",
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "56",
+        "name": "fetch_leanpub_covers",
+        "notes": [
+          " * Default value: `true`."
+        ],
+        "signature": "Leanpub.fetch_leanpub_covers",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "Leanpub.logger",
+        "desc": "Logger object used within the Spoon. Can be accessed to set the default log level for the messages coming from the Spoon.",
+        "doc": "Logger object used within the Spoon. Can be accessed to set the default log level for the messages coming from the Spoon.",
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "18",
+        "name": "logger",
+        "signature": "Leanpub.logger",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "Leanpub.persistent_notification",
+        "desc": "Table specifying the Leanpub status for which notifications should not disappear automatically.",
+        "doc": "Table specifying the Leanpub status for which notifications should not disappear automatically.\n\nNotes:\n * The indices correspond to the values of the `status` field returned by the Leanpub API. Possible values are `working` and `complete`. Default `{ complete = true }` to keep the \"Book generation complete\" messages.",
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "64",
+        "name": "persistent_notification",
+        "notes": [
+          " * The indices correspond to the values of the `status` field returned by the Leanpub API. Possible values are `working` and `complete`. Default `{ complete = true }` to keep the \"Book generation complete\" messages."
+        ],
+        "signature": "Leanpub.persistent_notification",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "Leanpub.watch_books",
+        "desc": "List of books to watch (by default an empty list).",
+        "doc": "List of books to watch (by default an empty list).\n\nNotes:\n * Each element of the list must be a table containing the following keys:\n  * slug - the web page \"slug\" of the book to watch. The slug of a book can be set under the \"Book Web Page / Web Page URL\" menu section in Leanpub.\n  * icon - optional icon to show in the notifications for the book, as an hs.image object. If not specified, and if `fetch_leanpub_covers` is `true`, then the icon is generated automatically from the book cover.\n  * syncs_to_dropbox - optional boolean to indicate whether the book is configured in Leanpub to sync to Dropbox (you can find this option in your books \"Writing mode\" screen, as \"Send output to Dropbox\". If true, the \"Book generation complete\" notification will include a \"Show\" button to open the book's directory in Dropbox. If you have multiple books and all of them are synced to Dropbox, you can set the main `Leanpub.books_sync_to_dropbox` variable instead of setting it for each book. Default value: `false`",
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "23",
+        "name": "watch_books",
+        "notes": [
+          " * Each element of the list must be a table containing the following keys:",
+          "  * slug - the web page \"slug\" of the book to watch. The slug of a book can be set under the \"Book Web Page / Web Page URL\" menu section in Leanpub.",
+          "  * icon - optional icon to show in the notifications for the book, as an hs.image object. If not specified, and if `fetch_leanpub_covers` is `true`, then the icon is generated automatically from the book cover.",
+          "  * syncs_to_dropbox - optional boolean to indicate whether the book is configured in Leanpub to sync to Dropbox (you can find this option in your books \"Writing mode\" screen, as \"Send output to Dropbox\". If true, the \"Book generation complete\" notification will include a \"Show\" button to open the book's directory in Dropbox. If you have multiple books and all of them are synced to Dropbox, you can set the main `Leanpub.books_sync_to_dropbox` variable instead of setting it for each book. Default value: `false`"
+        ],
+        "signature": "Leanpub.watch_books",
+        "stripped_doc": "",
+        "type": "Variable"
+      }
+    ],
+    "desc": "Spoon to track and notify about Leanpub builds.",
+    "doc": "Spoon to track and notify about Leanpub builds.\n\nDownload:\nhttps://github.com/Hammerspoon/Spoons/raw/master/Spoons/Leanpub.spoon.zip",
+    "items": [
+      {
+        "def": "Leanpub.api_key",
+        "desc": "String containing the key to use for Leanpub API requests.",
+        "doc": "String containing the key to use for Leanpub API requests.\n\nNotes:\n * Get it from your Leanpub account under the \"Author / Your API Key\" menu section. No default.",
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "43",
+        "name": "api_key",
+        "notes": [
+          " * Get it from your Leanpub account under the \"Author / Your API Key\" menu section. No default."
+        ],
+        "signature": "Leanpub.api_key",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "Leanpub.books_sync_to_dropbox",
+        "desc": "Boolean that specifies whether all your books are being synced to Dropbox.",
+        "doc": "Boolean that specifies whether all your books are being synced to Dropbox.\n\nNotes:\n * If true, the \"Book generation complete\" notification will include a \"Show\" button to open the book's directory in Dropbox.\n * Setting this is equivalent to setting the `syncs_to_dropbox` attribute for each book in `watch_books`. Default value: `false`.",
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "34",
+        "name": "books_sync_to_dropbox",
+        "notes": [
+          " * If true, the \"Book generation complete\" notification will include a \"Show\" button to open the book's directory in Dropbox.",
+          " * Setting this is equivalent to setting the `syncs_to_dropbox` attribute for each book in `watch_books`. Default value: `false`."
+        ],
+        "signature": "Leanpub.books_sync_to_dropbox",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "Leanpub.check_interval",
+        "desc": "Integer containing the interval (in seconds) at which the book status is checked. Default 5.",
+        "doc": "Integer containing the interval (in seconds) at which the book status is checked. Default 5.",
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "51",
+        "name": "check_interval",
+        "signature": "Leanpub.check_interval",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "Leanpub:displayAllBookStatus()",
+        "desc": "Check and display (if needed) the status of all the books in `watch_books`",
+        "doc": "Check and display (if needed) the status of all the books in `watch_books`\n\nParameters:\n * None",
+        "examples": [],
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "282",
+        "name": "displayAllBookStatus",
+        "notes": [],
+        "parameters": [
+          " * None"
+        ],
+        "returns": [],
+        "signature": "Leanpub:displayAllBookStatus()",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "Leanpub:displayBookStatus(book)",
+        "desc": "Display a notification with the current build status of a book.",
+        "doc": "Display a notification with the current build status of a book.\n\nParameters:\n * book - table containing the information of the book to check. The table must contain the following fields:\n   * slug - URL \"slug\" of the book to check. The slug is the part of the book URL after https://leanpub.com/.\n   * icon - optional icon to show in the notifications for the book, as an `hs.image` object. If this field is not specified but `fetch_leanpub_covers` is true (the default value), this method attempts to fetch the book cover from Leanpub. If the cover can be retrieved, it gets stored in the icon field so it doesn't get fetched every time. You can disable cover fetching for individual books by setting this field explicitly to `false`\n\nReturns:\n * A Lua table containing the status (may be empty), nil if an error occurred\n\nNotes:\n* Only produce a notification if the current status is different than the last known one (from the last time `displayBookStatus` was run for the same book).",
+        "examples": [],
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "144",
+        "name": "displayBookStatus",
+        "notes": [
+          "* Only produce a notification if the current status is different than the last known one (from the last time `displayBookStatus` was run for the same book)."
+        ],
+        "parameters": [
+          " * book - table containing the information of the book to check. The table must contain the following fields:\n   * slug - URL \"slug\" of the book to check. The slug is the part of the book URL after https://leanpub.com/.\n   * icon - optional icon to show in the notifications for the book, as an `hs.image` object. If this field is not specified but `fetch_leanpub_covers` is true (the default value), this method attempts to fetch the book cover from Leanpub. If the cover can be retrieved, it gets stored in the icon field so it doesn't get fetched every time. You can disable cover fetching for individual books by setting this field explicitly to `false`"
+        ],
+        "returns": [
+          " * A Lua table containing the status (may be empty), nil if an error occurred"
+        ],
+        "signature": "Leanpub:displayBookStatus(book)",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "Leanpub.dropbox_path",
+        "desc": "String containing the base Dropbox path to which the books are synced, if the corresponding parameters are set.",
+        "doc": "String containing the base Dropbox path to which the books are synced, if the corresponding parameters are set.\n\nNotes:\n * If unset, the path is determined automatically by reading the ~/.dropbox/info.json file and choosing the path corresponding to the profile specified in `Leanpub.dropbox_profile`.\n * If for some reason your synced files are somewhere else, you can store in this variable the final path to use. Most users should be fine with the defaults.",
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "72",
+        "name": "dropbox_path",
+        "notes": [
+          " * If unset, the path is determined automatically by reading the ~/.dropbox/info.json file and choosing the path corresponding to the profile specified in `Leanpub.dropbox_profile`.",
+          " * If for some reason your synced files are somewhere else, you can store in this variable the final path to use. Most users should be fine with the defaults."
+        ],
+        "signature": "Leanpub.dropbox_path",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "Leanpub.dropbox_type",
+        "desc": "String containing the name of the Dropbox account type to use for determining the base path of the Dropbox directory.",
+        "doc": "String containing the name of the Dropbox account type to use for determining the base path of the Dropbox directory.\n\nNotes:\n * Valid values are \"personal\" and \"business\". See https://help.dropbox.com/installs-integrations/desktop/locate-dropbox-folder for the details.\n * Default value: \"personal\".",
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "81",
+        "name": "dropbox_type",
+        "notes": [
+          " * Valid values are \"personal\" and \"business\". See https://help.dropbox.com/installs-integrations/desktop/locate-dropbox-folder for the details.",
+          " * Default value: \"personal\"."
+        ],
+        "signature": "Leanpub.dropbox_type",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "Leanpub.fetch_leanpub_covers",
+        "desc": "Boolean indicating whether we should try to fetch book covers from Leanpub.",
+        "doc": "Boolean indicating whether we should try to fetch book covers from Leanpub.\n\nNotes:\n * Default value: `true`.",
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "56",
+        "name": "fetch_leanpub_covers",
+        "notes": [
+          " * Default value: `true`."
+        ],
+        "signature": "Leanpub.fetch_leanpub_covers",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "Leanpub:fetchBookCover(book)",
+        "desc": "Fetch the cover of a book.",
+        "doc": "Fetch the cover of a book.\n\nParameters:\n * book - table containing the book information. The icon gets\n   stored in its `icon` field when it can be fetched.\n\nReturns:\n * No return value\n\nNotes:\n * Side effects:\n  * Stores the icon in the book data structure",
+        "examples": [],
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "240",
+        "name": "fetchBookCover",
+        "notes": [
+          " * Side effects:",
+          "  * Stores the icon in the book data structure"
+        ],
+        "parameters": [
+          " * book - table containing the book information. The icon gets stored in its `icon` field when it can be fetched."
+        ],
+        "returns": [
+          " * No return value"
+        ],
+        "signature": "Leanpub:fetchBookCover(book)",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "Leanpub:getBookStatus(slug, callback)",
+        "desc": "Asynchronously get the status of a book given its slug.",
+        "doc": "Asynchronously get the status of a book given its slug.\n\nParameters:\n * slug - URL \"slug\" of the book to check. The slug of a book is the part of the URL for your book after https://leanpub.com/.\n * callback - function to which the book status will be passed when the data is received. This function will be passed a single argument, a table containing the fields returned by the Leanpub API. If the book is not being built at the moment, an empty table is passed. If an error occurs, the value passed will be `nil`. Samples of the return values can be found at https://leanpub.com/help/api#getting-the-job-status\n\nReturns:\n * No return value",
+        "examples": [],
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "107",
+        "name": "getBookStatus",
+        "notes": [],
+        "parameters": [
+          " * slug - URL \"slug\" of the book to check. The slug of a book is the part of the URL for your book after https://leanpub.com/.",
+          " * callback - function to which the book status will be passed when the data is received. This function will be passed a single argument, a table containing the fields returned by the Leanpub API. If the book is not being built at the moment, an empty table is passed. If an error occurs, the value passed will be `nil`. Samples of the return values can be found at https://leanpub.com/help/api#getting-the-job-status"
+        ],
+        "returns": [
+          " * No return value"
+        ],
+        "signature": "Leanpub:getBookStatus(slug, callback)",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "Leanpub.logger",
+        "desc": "Logger object used within the Spoon. Can be accessed to set the default log level for the messages coming from the Spoon.",
+        "doc": "Logger object used within the Spoon. Can be accessed to set the default log level for the messages coming from the Spoon.",
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "18",
+        "name": "logger",
+        "signature": "Leanpub.logger",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "Leanpub.persistent_notification",
+        "desc": "Table specifying the Leanpub status for which notifications should not disappear automatically.",
+        "doc": "Table specifying the Leanpub status for which notifications should not disappear automatically.\n\nNotes:\n * The indices correspond to the values of the `status` field returned by the Leanpub API. Possible values are `working` and `complete`. Default `{ complete = true }` to keep the \"Book generation complete\" messages.",
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "64",
+        "name": "persistent_notification",
+        "notes": [
+          " * The indices correspond to the values of the `status` field returned by the Leanpub API. Possible values are `working` and `complete`. Default `{ complete = true }` to keep the \"Book generation complete\" messages."
+        ],
+        "signature": "Leanpub.persistent_notification",
+        "stripped_doc": "",
+        "type": "Variable"
+      },
+      {
+        "def": "Leanpub:start()",
+        "desc": "Start periodic check for book status, checking every check_interval seconds.",
+        "doc": "Start periodic check for book status, checking every check_interval seconds.\n\nParameters:\n * None",
+        "examples": [],
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "296",
+        "name": "start",
+        "notes": [],
+        "parameters": [
+          " * None"
+        ],
+        "returns": [],
+        "signature": "Leanpub:start()",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "Leanpub:stop()",
+        "desc": "Stops periodic check for book status, if enabled.",
+        "doc": "Stops periodic check for book status, if enabled.\n\nParameters:\n * None",
+        "examples": [],
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "309",
+        "name": "stop",
+        "notes": [],
+        "parameters": [
+          " * None"
+        ],
+        "returns": [],
+        "signature": "Leanpub:stop()",
+        "stripped_doc": "",
+        "type": "Method"
+      },
+      {
+        "def": "Leanpub.watch_books",
+        "desc": "List of books to watch (by default an empty list).",
+        "doc": "List of books to watch (by default an empty list).\n\nNotes:\n * Each element of the list must be a table containing the following keys:\n  * slug - the web page \"slug\" of the book to watch. The slug of a book can be set under the \"Book Web Page / Web Page URL\" menu section in Leanpub.\n  * icon - optional icon to show in the notifications for the book, as an hs.image object. If not specified, and if `fetch_leanpub_covers` is `true`, then the icon is generated automatically from the book cover.\n  * syncs_to_dropbox - optional boolean to indicate whether the book is configured in Leanpub to sync to Dropbox (you can find this option in your books \"Writing mode\" screen, as \"Send output to Dropbox\". If true, the \"Book generation complete\" notification will include a \"Show\" button to open the book's directory in Dropbox. If you have multiple books and all of them are synced to Dropbox, you can set the main `Leanpub.books_sync_to_dropbox` variable instead of setting it for each book. Default value: `false`",
+        "file": "Source/Leanpub.spoon//init.lua",
+        "lineno": "23",
+        "name": "watch_books",
+        "notes": [
+          " * Each element of the list must be a table containing the following keys:",
+          "  * slug - the web page \"slug\" of the book to watch. The slug of a book can be set under the \"Book Web Page / Web Page URL\" menu section in Leanpub.",
+          "  * icon - optional icon to show in the notifications for the book, as an hs.image object. If not specified, and if `fetch_leanpub_covers` is `true`, then the icon is generated automatically from the book cover.",
+          "  * syncs_to_dropbox - optional boolean to indicate whether the book is configured in Leanpub to sync to Dropbox (you can find this option in your books \"Writing mode\" screen, as \"Send output to Dropbox\". If true, the \"Book generation complete\" notification will include a \"Show\" button to open the book's directory in Dropbox. If you have multiple books and all of them are synced to Dropbox, you can set the main `Leanpub.books_sync_to_dropbox` variable instead of setting it for each book. Default value: `false`"
+        ],
+        "signature": "Leanpub.watch_books",
+        "stripped_doc": "",
+        "type": "Variable"
+      }
+    ],
+    "name": "Leanpub",
+    "stripped_doc": "\nDownload:\nhttps://github.com/Hammerspoon/Spoons/raw/master/Spoons/Leanpub.spoon.zip",
+    "submodules": [],
+    "type": "Module"
+  }
+]
