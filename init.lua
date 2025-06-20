@@ -1,6 +1,5 @@
 -- Track current state
 local currentMotionSetting = nil
-local currentTransparencySetting = nil
 local currentPowerSource = nil
 
 function updateAccessibilitySettings()
@@ -10,19 +9,11 @@ function updateAccessibilitySettings()
   currentPowerSource = powerSource
   local onBattery = (powerSource == "Battery Power")
   local desiredMotion = onBattery
-  local desiredTransparency = onBattery
-
   local changed = false
 
   if currentMotionSetting ~= desiredMotion then
     hs.execute("defaults write com.apple.universalaccess reduceMotion -bool " .. tostring(desiredMotion), true)
     currentMotionSetting = desiredMotion
-    changed = true
-  end
-
-  if currentTransparencySetting ~= desiredTransparency then
-    hs.execute("defaults write com.apple.universalaccess reduceTransparency -bool " .. tostring(desiredTransparency), true)
-    currentTransparencySetting = desiredTransparency
     changed = true
   end
 
