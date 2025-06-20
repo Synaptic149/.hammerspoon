@@ -2,6 +2,28 @@
 local currentMotionSetting = nil
 local currentPowerSource = nil
 
+-- Helper function to check if any app is in fullscreen mode
+function hasFullscreenApp()
+  local allWindows = hs.window.allWindows()
+  for _, window in pairs(allWindows) do
+    if window:isFullScreen() then
+      return true
+    end
+  end
+  return false
+end
+
+-- Helper function to wait for no fullscreen apps and then kill dock
+function killDockWhenNoFullscreen()
+  if hasFullscreenApp() then
+    -- Check again in 15 seconds
+    hs.timer.doAfter(15, killDockWhenNoFullscreen)
+  else
+    -- No fullscreen apps, safe to kill dock
+    hs.task.new("/usr/bin/killall", nil, function() return false end, { "Dock" }):start()
+  end
+end
+
 function updateAccessibilitySettings()
   local powerSource = hs.battery.powerSource()
   if powerSource == currentPowerSource then return end  -- no change, exit early
@@ -18,8 +40,8 @@ function updateAccessibilitySettings()
   end
 
   if changed then
-    hs.task.new("/usr/bin/killall", nil, function() return false end, { "Dock" }):start()
-    hs.alert.show("Running on " .. (onBattery and "battery" or "AC"))
+    hs.alert.show("Running on " .. (onBattery and "battery" or "AC"), 1.5)
+    killDockWhenNoFullscreen()
   end
 end
 
