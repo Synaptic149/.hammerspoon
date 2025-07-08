@@ -33,16 +33,23 @@ function updateAccessibilitySettings()
   local desiredMotion = onBattery
   local changed = false
 
+  -- Update motion settings if needed
   if currentMotionSetting ~= desiredMotion then
     hs.execute("defaults write com.apple.universalaccess reduceMotion -bool " .. tostring(desiredMotion), true)
     currentMotionSetting = desiredMotion
     changed = true
   end
 
+  -- Always update dock magnification
+  local mag = onBattery and "false" or "true"
+  hs.execute("defaults write com.apple.dock magnification -bool " .. mag, true)
+
   if changed then
     hs.alert.show("Running on " .. (onBattery and "battery" or "AC"), 1.5)
-    killDockWhenNoFullscreen()
   end
+  
+  -- Only restart dock once after all settings are updated
+  killDockWhenNoFullscreen()
 end
 
 -- Use older, compatible battery watcher
