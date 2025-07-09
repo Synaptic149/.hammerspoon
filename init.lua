@@ -25,31 +25,42 @@ function killDockWhenNoFullscreen()
 end
 
 function updateAccessibilitySettings()
+  local t0 = hs.timer.secondsSinceEpoch()
+  print("[HSP] updateAccessibilitySettings: start", t0)
+
   local powerSource = hs.battery.powerSource()
-  if powerSource == currentPowerSource then return end  -- no change, exit early
+  print("[HSP] powerSource:", tostring(powerSource), "dt:", hs.timer.secondsSinceEpoch() - t0)
+
+  if powerSource == currentPowerSource then
+    print("[HSP] No change, exit early", "dt:", hs.timer.secondsSinceEpoch() - t0)
+    return
+  end
 
   currentPowerSource = powerSource
   local onBattery = (powerSource == "Battery Power")
   local desiredMotion = onBattery
   local changed = false
 
-  -- Update motion settings if needed
   if currentMotionSetting ~= desiredMotion then
+    print("[HSP] Changing reduceMotion...", "dt:", hs.timer.secondsSinceEpoch() - t0)
     hs.execute("defaults write com.apple.universalaccess reduceMotion -bool " .. tostring(desiredMotion), true)
     currentMotionSetting = desiredMotion
     changed = true
+    print("[HSP] Changed reduceMotion", "dt:", hs.timer.secondsSinceEpoch() - t0)
   end
 
-  -- Always update dock magnification
+  print("[HSP] Changing dock magnification...", "dt:", hs.timer.secondsSinceEpoch() - t0)
   local mag = onBattery and "false" or "true"
   hs.execute("defaults write com.apple.dock magnification -bool " .. mag, true)
+  print("[HSP] Changed dock magnification", "dt:", hs.timer.secondsSinceEpoch() - t0)
 
   if changed then
     hs.alert.show("Running on " .. (onBattery and "battery" or "AC"), 1.5)
   end
-  
-  -- Only restart dock once after all settings are updated
+
+  print("[HSP] About to call killDockWhenNoFullscreen", "dt:", hs.timer.secondsSinceEpoch() - t0)
   killDockWhenNoFullscreen()
+  print("[HSP] Finished updateAccessibilitySettings", "dt:", hs.timer.secondsSinceEpoch() - t0)
 end
 
 -- Use older, compatible battery watcher
