@@ -43,7 +43,7 @@ function updateAccessibilitySettings()
 
   if currentMotionSetting ~= desiredMotion then
     print("[HSP] Changing reduceMotion...", "dt:", hs.timer.secondsSinceEpoch() - t0)
-    hs.execute("defaults write com.apple.universalaccess reduceMotion -bool " .. tostring(desiredMotion), true)
+    hs.execute("defaults write com.apple.universalaccess reduceMotion -bool " .. tostring(desiredMotion), false, "/bin/sh")
     currentMotionSetting = desiredMotion
     changed = true
     print("[HSP] Changed reduceMotion", "dt:", hs.timer.secondsSinceEpoch() - t0)
@@ -51,7 +51,7 @@ function updateAccessibilitySettings()
 
   print("[HSP] Changing dock magnification...", "dt:", hs.timer.secondsSinceEpoch() - t0)
   local mag = onBattery and "false" or "true"
-  hs.execute("defaults write com.apple.dock magnification -bool " .. mag, true)
+  hs.execute("defaults write com.apple.dock magnification -bool " .. mag, false, "/bin/sh")
   print("[HSP] Changed dock magnification", "dt:", hs.timer.secondsSinceEpoch() - t0)
 
   if changed then
